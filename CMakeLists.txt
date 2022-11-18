@@ -3,7 +3,7 @@
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # Created November 18, 2022 by Perkins
-# Last Change: 2022-11-18 08:25:34 d3g096
+# Last Change: 2022-11-18 08:35:29 d3g096
 # -------------------------------------------------------------
 
 cmake_minimum_required (VERSION 3.16)
@@ -20,6 +20,7 @@ option(ANN_PERF "Enable performance evaluation." OFF)
 # -------------------------------------------------------------
 # Investigate environment
 # -------------------------------------------------------------
+include(CheckIncludeFileCXX)
 CHECK_INCLUDE_FILE_CXX(limits.h HAVE_LIMITS_H)
 CHECK_INCLUDE_FILE_CXX(float.h HAVE_FLOAT_H)
 
@@ -27,6 +28,7 @@ if (NOT (HAVE_LIMITS_H OR HAVE_FLOAT_H))
   add_definitions("-DANN_NO_LIMITS_H")
 endif()
 
+include(CheckFunctionExists)
 check_function_exists(random HAVE_RANDOM)
 if (NOT HAVE_RANDOM)
   add_definitions("-DANN_NO_RANDOM")
@@ -38,6 +40,9 @@ endif()
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 add_subdirectory(src)
+add_subdirectory(test)
+add_subdirectory(sample)
+add_subdirectory(ann2fig)
 
 
 # -------------------------------------------------------------
