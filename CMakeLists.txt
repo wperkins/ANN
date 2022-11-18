@@ -3,7 +3,7 @@
 # -------------------------------------------------------------
 # -------------------------------------------------------------
 # Created November 18, 2022 by Perkins
-# Last Change: 2022-11-18 08:35:29 d3g096
+# Last Change: 2022-11-18 09:10:19 d3g096
 # -------------------------------------------------------------
 
 cmake_minimum_required (VERSION 3.16)
@@ -16,6 +16,10 @@ enable_language(CXX)
 # options
 # -------------------------------------------------------------
 option(ANN_PERF "Enable performance evaluation." OFF)
+
+if (ANN_PERF)
+  add_definitions("-DANN_PERF")
+endif ()
 
 # -------------------------------------------------------------
 # Investigate environment
@@ -48,3 +52,17 @@ add_subdirectory(ann2fig)
 # -------------------------------------------------------------
 # Installation
 # -------------------------------------------------------------
+install(FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/ANN/ANNx.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/ANN/ANNperf.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/ANN/ANN.h
+  DESTINATION include/ANN
+)
+
+install(FILES
+  ${CMAKE_CURRENT_SOURCE_DIR}/Copyright.txt
+  ${CMAKE_CURRENT_SOURCE_DIR}/License.txt
+  ${CMAKE_CURRENT_SOURCE_DIR}/ReadMe.txt
+  ${CMAKE_CURRENT_SOURCE_DIR}/doc/ANNmanual.pdf
+  DESTINATION share/ANN
+)
